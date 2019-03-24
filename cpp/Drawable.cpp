@@ -5,6 +5,14 @@
  *      Author: yura
  */
 
+/*
+ * How to use
+ * Create object
+	Drawable *dr = new Drawable();
+	Draw new windows or objects
+	and call dr->swap_buffers();
+ * */
+
 #include <Drawable.h>
 
 Drawable::Drawable() {

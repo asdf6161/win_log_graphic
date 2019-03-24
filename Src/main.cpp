@@ -56,7 +56,8 @@ extern "C" {
 #include "lcd_log.h"
 #include "stm32f7xx_hal_ltdc.h"
 }
-#include "Window.h"
+//#include "Window.h"
+#include "plot.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -176,12 +177,14 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-	Window *win = new Window(Point2d(100, 100));
+//	Window *win = new Window(Point2d(100, 100), 800, 500);
+	plot *win = new plot();
+	win->set_size(800, 300);
 	Point2d pos;
 	pos.x = 100;
-	pos.y = 100;
-	int8_t dx = 5;
-	int8_t dy = 2;
+	pos.y = 90;
+	int8_t dx = 2;
+	int8_t dy = 1;
 	while (1)
 	{
 		pos.x += dx;

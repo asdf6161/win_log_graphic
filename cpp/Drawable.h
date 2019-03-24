@@ -30,6 +30,7 @@ public:
 	void draw_polygon(Polygon *p);
 	void draw_fill_polygon(Polygon *p);
 	void draw_text(unsigned char *text, Point2d pos);
+
 	void clear_display();
 
 	void swap_buffers();

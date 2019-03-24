@@ -13,36 +13,41 @@
 
 class Header : private Drawable{
 public:
-	Header(x16 height);
+	Header(Point2d pos, x16 width, x16 height);
 	virtual ~Header();
 
-	void draw(Point2d pos, x16 width);
+	void draw();
 	void draw_title(Point2d pos);
 
-private:
+protected:
 	Color color;
 	Color text_color;
 	std::string title = "";
+public:
 	x16 height;
+	x16 width;
+	Point2d pos;
 };
 
 class Window : protected Drawable{
 public:
 	Window();
 	Window(Point2d pos);
+	Window(Point2d pos, x16 width, x16 height);
 	virtual ~Window();
 
-	void draw();
+	virtual void draw();
 	void draw_border();
 	void draw_header();
-	void fill_background(Color c);
-	void fill_background();
+	virtual void fill_background(Color c);
+	virtual void fill_background();
 	void set_thickness(x16 t);
 	void set_pos(Point2d pos);
+	virtual void set_size(x16 width, x16 height);
 	void init();
 
-private:
-	Header head = Header(30);
+protected:
+	Header *head = nullptr;
 	Point2d pos = Point2d(0,0);
 	Color background_color = Color(29, 58, 29);
 

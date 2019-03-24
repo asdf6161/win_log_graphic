@@ -5,11 +5,21 @@
  *      Author: yura
  */
 
+/*
+ * How to use
+ *
+	Window *win = new Window(Point2d(100, 100));
+	win->draw();
+	after need use Drawvable object for swap buffer
+ * */
+
 #include <Window.h>
 
 
-Header::Header(x16 height){
+Header::Header(Point2d pos, x16 width, x16 height){
 	this->height = height;
+	this->width = width;
+	this->pos = pos;
 	title = "Window";
 	color = Color(0x04DF);
 	text_color = Color(0xFFFF);
@@ -19,18 +29,18 @@ Header::~Header(){
 
 }
 
-void Header::draw(Point2d pos, x16 width){
+void Header::draw(){
 	Color *b_color = Drawable::get_draw_color();
 	Color *back_color = Drawable::get_text_back_color();
 
 	// draw header rect
 	Drawable::set_draw_color(color);
-	Drawable::draw_fill_rect(pos, width, height);
+	Drawable::draw_fill_rect(this->pos, this->width, height);
 
 	// draw title
 	Drawable::set_text_back_color(color);
 	Drawable::set_draw_color(text_color);
-	draw_title(pos);
+	draw_title(this->pos);
 
 	// return colors
 	Drawable::set_text_back_color(*back_color);
@@ -54,6 +64,12 @@ Window::Window(Point2d pos){
 	set_pos(pos);
 }
 
+Window::Window(Point2d pos, x16 width, x16 height){
+	init();
+	set_pos(pos);
+	set_size(width, height);
+}
+
 Window::~Window() {
 
 }
@@ -64,6 +80,7 @@ void Window::init(){
 	width = 320;
 	height = 240;
 	thickness_border = 5;
+	this->head = new Header(pos, width, 30);
 }
 
 void Window::draw(){
@@ -89,7 +106,9 @@ void Window::draw_border(){
 }
 
 void Window::draw_header(){
-	head.draw(pos, width);
+	head->pos = this->pos;
+	head->width = this->width;
+	head->draw();
 }
 
 void Window::set_thickness(x16 t){
@@ -98,6 +117,11 @@ void Window::set_thickness(x16 t){
 
 void Window::set_pos(Point2d pos){
 	this->pos = pos;
+}
+
+void Window::set_size(x16 width, x16 height){
+	this->width = width;
+	this->height = height;
 }
 
 void Window::fill_background(Color c){
