@@ -1,0 +1,64 @@
+/*
+ * Vector3D.cpp
+ *
+ *  Created on: 16 мар. 2019 г.
+ *      Author: yura
+ */
+
+#include <3d_model/BaseElem3D.h>
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////											/////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+Point3D::Point3D(float x, float y, float z) {
+	this->set_coor(x, y, z);
+}
+
+Point3D::Point3D(Point3D *p){
+	this->set_coor(p->x, p->y, p->z);
+}
+
+Point3D::Point3D(){
+
+}
+
+Point3D::~Point3D() {
+}
+
+void Point3D::set_coor(float x, float y, float z){
+	this->x = x;
+	this->y = y;
+	this->z = z;
+}
+
+void Point3D::scale(uint16_t scale){
+	this->x *= scale;
+	this->y *= scale;
+	this->z *= scale;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////											/////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+Vector3D::Vector3D(Point3D *point_1, Point3D *point_2) {
+	this->point_1 = point_1;
+	this->point_2 = point_2;
+}
+
+Vector3D::~Vector3D() {
+}
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////											/////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+Polygon::Polygon(Point3D **points, uint8_t p_cnt) {
+	this->points = points;
+	this->p_cnt = p_cnt;
+}
+
+Polygon::~Polygon() {
+}
+
+uint8_t Polygon::size(){
+	return this->p_cnt;
+}
